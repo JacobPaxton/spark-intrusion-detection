@@ -9,25 +9,47 @@ Here is the official description of this dataset: https://kdd.ics.uci.edu/databa
 This dataset is available for download here: https://www.kaggle.com/galaxyh/kdd-cup-1999-data
 
 # Objectives
-1. Use Spark for data wrangling, queries, aggregation, split, and sampling
-    * Use all normal rows, drop 95% of DOS attack rows, and use all non-DOS attack traffic: roughly 1.1m rows
-    * Split the roughly-1.1m rows into 50%-30%-20% (train-validate-test) splits, stratify train and validate split
-2. Use anomaly detection techniques to build features through risk thresholds
-    * Domain knowledge: Manual thresholding
-    * Exploration: Analyze each attack's metrics against normal data, document deviations, create features
-3. Use clustering techniques to capture any unusual connections not directly addressed in anomaly detection
-    * Intended clustering technique: DBSCAN, for its inbuilt outlier classification
-4. Deliver insights comparing attacks to normal data in different metrics
-    * Cover the 4 major attack categories and their appearance in the dataset
-5. Build classification models using selected and engineered features
-    * Fit on train split
-    * Prioritized algorithm: SVM, but use other algorithms as well
-6. Evaluate models, tune hyperparameters, and select best-performing model
-    * Evaluate on train (in-sample) and validate (out-of-sample) data splits
-7. Evaluate best-performing model on sequestered test split
-
-# Additional Objective
-In addition to this analysis and modeling, I would like to take some time to deploy the model onto an Azure partition and process the additional unlabeled dataset in a batch, simulating a detected breach and using the model to identify the offending traffic.
+1. Use Spark to accomplish wrangling and queries
+2. Use Spark's MLlib to split and stratify data and to conduct statistical testing
+3. Use Spark to engineer features using anomaly detection techniques
+4. Use Spark's MLlib to create features using outlier-detection clustering
+5. Use Spark's MLlib to create classification models using engineered features
+6. Use Spark's MLlib to evaluate models, tune hyperparameters, and evaluate on sequestered split
+7. Output Spark aggregation to CSVs for Tableau visualization
+8. Present work and findings in a Jupyter Notebook
 
 # Plan
-1. 
+## Minimum Viable Product (MVP)
+- [x] Set up a Spark virtual environment
+- [x] Ingest the full intrusion detection dataset
+- [x] Gain initial awareness using basic distributions and value counts
+- [x] Determine the path forward and next steps
+- [ ] Reduce 'smurf' and 'neptune' attack classes by 95% through isolating their rows and sampling
+    * New df for 'smurf' and 'neptune'; df.sample with fraction=.95; list 95% indices; drop indices in original
+- [ ] Convert dataset to binary classes by combining all attack classes into category 'anomalous'
+- [ ] Split the reduced dataset 50%-30%-20% for model training, validation, and testing
+    * Stratify the target column between train and validate split
+    * Sequester the validate and test splits for later use; only use train split for exploration and model fit
+- [ ] Create initial hypotheses using domain knowledge, conduct statistical testing to answer them
+    * Categorical target: Use Chi Square tests and Comparison of Means tests
+    * Hypotheses: Attack categories have certain expected appearance in the dataset
+    * Export results to Pandas for quick visualization in Seaborn
+- [ ] Use initial-hypotheses features that proved significant as model features
+- [ ] Build and fit a classification model on selected features in train split
+- [ ] Evaluate model performance on in-sample (train) and out-of-sample (validate) data
+- [ ] Push work to scripts
+- [ ] Report all work in MVP final notebook
+## Post-MVP Iteration
+- [ ] Conduct statistical testing on categorical features to identify potential candidates for modeling
+- [ ] Check distributions on continuous features using target as hue to identify features for clustering
+- [ ] Use feature engineering to create more-predictive features
+- [ ] Use Tableau to visualize engineered features
+- [ ] Build and fit more classification models using new features
+- [ ] Use Grid Search to optimize hyperparameters
+- [ ] Evaluate tuned models on train and validate
+- [ ] Select best model and evaluate model on test
+- [ ] Report all work in post-MVP final notebook
+## Production
+- [ ] Push model to an AWS partition through Docker
+- [ ] Pass sequestered unlabeled dataset to model in batch
+- [ ] Report results in production notebook
