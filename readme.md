@@ -28,3 +28,6 @@ This dataset is available for download here: https://www.kaggle.com/galaxyh/kdd-
 
 # Additional Objective
 In addition to this analysis and modeling, I would like to take some time to deploy the model onto an Azure partition and process the additional unlabeled dataset in a batch, simulating a detected breach and using the model to identify the offending traffic.
+
+# Plan
+1. 
