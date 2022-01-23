@@ -10,7 +10,7 @@ This dataset is available for download here: https://www.kaggle.com/galaxyh/kdd-
 
 # Objectives
 1. Use Spark to accomplish wrangling and queries
-2. Use Spark's MLlib to split and stratify data and to conduct statistical testing
+2. Use Spark's MLlib to split data and to conduct statistical testing
 3. Use Spark to engineer features using anomaly detection techniques
 4. Use Spark's MLlib to create features using outlier-detection clustering
 5. Use Spark's MLlib to create classification models using engineered features
@@ -24,12 +24,11 @@ This dataset is available for download here: https://www.kaggle.com/galaxyh/kdd-
 - [x] Ingest the full intrusion detection dataset
 - [x] Gain initial awareness using basic distributions and value counts
 - [x] Determine the path forward and next steps
-- [ ] Reduce 'smurf' and 'neptune' attack classes by 95% through isolating their rows and sampling
-    * New df for 'smurf' and 'neptune'; df.sample with fraction=.95; list 95% indices; drop indices in original
-- [ ] Convert dataset to binary classes by combining all attack classes into category 'anomalous'
-- [ ] Split the reduced dataset 50%-30%-20% for model training, validation, and testing
+- [x] Reduce 'smurf' and 'neptune' attack classes by 95% through isolating their rows and sampling
+    * Use sampleBy with python dict containing each class's fraction
+- [x] Convert dataset to binary classes by combining all attack classes into category 'anomalous'
+- [x] Split the reduced dataset 50%-30%-20% for model training, validation, and testing
     * Stratify the target column between train and validate split
-    * Sequester the validate and test splits for later use; only use train split for exploration and model fit
 - [ ] Create initial hypotheses using domain knowledge, conduct statistical testing to answer them
     * Categorical target: Use Chi Square tests and Comparison of Means tests
     * Hypotheses: Attack categories have certain expected appearance in the dataset
