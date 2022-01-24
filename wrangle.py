@@ -3,9 +3,49 @@ import pyspark
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 
+def prep_model_MVP():
+    '''
+        Acquire network intrusion dataset,
+        Limit features to exploration-selected 'srv_count' and 'num_failed_logins',
+        Fix column dtypes,
+        Reduce DOS attack class rows by 95%,
+        Group all attack classes into 'anomalous' class,
+        Split data 50%-30%-20% for df, validate, and test splits,
+        Return the three splits.
+    '''
+    # set up environment, ingest data
+    spark = pyspark.sql.SparkSession.builder.getOrCreate()
+    df = spark.read.csv('kddcup.data.corrected', header=True)
+
+    # select the two MVP features and the target
+    df = df.select('srv_count', 'num_failed_logins', 'target')
+
+    # fix dtypes
+    df = df.withColumn('num_failed_logins', df.num_failed_logins.cast(IntegerType()))\
+           .withColumn('srv_count', df.srv_count.cast(IntegerType()))
+
+    # convert target to binary classification, limit DOS attack rows 95%
+    df = convert_to_binary_class(df)
+
+    # encode target column for 1 = anomaly
+    df = df.withColumn('target', when(df.target == 'anomalous', 1).otherwise(0))
+
+    # split data 50%-30%-20%
+    train, validate, test = df.randomSplit([0.5, 0.3, 0.2], seed=42)
+
+    # convert the splits to pandas dataframes
+    train = train.toPandas()
+    validate = validate.toPandas()
+    test = test.toPandas()
+
+    # return original and splits
+    return train, validate, test
+
+
 def prep_explore():
     '''
         Acquire network intrusion dataset,
+        Fix column dtypes,
         Reduce DOS attack class rows by 95%,
         Group all attack classes into 'anomalous' class,
         Split data 50%-30%-20% for df, validate, and test splits,
@@ -18,6 +58,23 @@ def prep_explore():
     # fix column dtypes
     df = fix_dtypes(df)
 
+    # convert target to binary classification, limit DOS attack rows 95%
+    df = convert_to_binary_class(df)
+
+    # split data 50%-30%-20%
+    train, _, _ = df.randomSplit([0.5, 0.3, 0.2], seed=42)
+
+    # return original and splits
+    return df, train
+
+
+def convert_to_binary_class(df):
+    '''
+        Take the network intrustion dataframe, 
+        Reduce DOS attack rows by 95%, 
+        Convert target to 'normal' and 'anomalous' classes for binary classification,
+        Return dataframe.
+    '''
     # set sample size to 5% for 'neptune' and 'smurf' attack classes
     fraction_df = (
             df.select('target')
@@ -29,16 +86,13 @@ def prep_explore():
     )
 
     # convert fractions df to dict, use dict in sampleBy
-    df = df.sampleBy('target', fraction_df.toPandas().set_index('target').to_dict()['fraction'])
+    df = df.sampleBy('target', fraction_df.toPandas().set_index('target').to_dict()['fraction'], seed=42)
 
     # convert target column to 'normal' and 'anomalous' classes
     df = df.withColumn('target', when(df.target != 'normal.', 'anomalous').otherwise('normal'))
 
-    # split data 50%-30%-20%
-    train, validate, test = df.randomSplit([0.5, 0.3, 0.2], seed=42)
+    return df
 
-    # return original and splits
-    return train, df, validate, test
 
 def fix_dtypes(df):
     """ Cast every column in the network intrusion dataset as the proper dtype """
