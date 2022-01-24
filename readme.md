@@ -10,13 +10,14 @@ This dataset is available for download here: https://www.kaggle.com/galaxyh/kdd-
 
 # Objectives
 1. Use Spark to accomplish wrangling and queries
-2. Use Spark's MLlib to split data and to conduct statistical testing
-3. Use Spark to engineer features using anomaly detection techniques
-4. Use Spark's MLlib to create features using outlier-detection clustering
-5. Use Spark's MLlib to create classification models using engineered features
-6. Use Spark's MLlib to evaluate models, tune hyperparameters, and evaluate on sequestered split
-7. Output Spark aggregation to CSVs for Tableau visualization
-8. Present work and findings in a Jupyter Notebook
+2. Use Spark's MLlib to split data
+3. Export columns for statistical testing and visualization as required
+4. Use Spark to engineer features using anomaly detection techniques
+5. Use Spark's MLlib to create features using outlier-detection clustering
+6. Use Spark's MLlib to create classification models using engineered features
+7. Use Spark's MLlib to evaluate models, tune hyperparameters, and evaluate on sequestered split
+8. Output Spark aggregation to CSVs for Tableau visualization
+9. Present work and findings in a Jupyter Notebook
 
 # Plan
 ## Minimum Viable Product (MVP)
