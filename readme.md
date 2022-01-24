@@ -30,14 +30,14 @@ This dataset is available for download here: https://www.kaggle.com/galaxyh/kdd-
 - [x] Convert dataset to binary classes by combining all attack classes into category 'anomalous'
 - [x] Split the reduced dataset 50%-30%-20% for model training, validation, and testing
     * Stratify the target column between train and validate split
-- [ ] Create initial hypotheses using domain knowledge, conduct statistical testing to answer them
+- [x] Create initial hypotheses using domain knowledge, conduct statistical testing to answer them
     * Categorical target: Use Chi Square tests and Comparison of Means tests
     * Hypotheses: Attack categories have certain expected appearance in the dataset
     * Export results to Pandas for quick visualization in Seaborn
-- [ ] Use initial-hypotheses features that proved significant as model features
-- [ ] Build and fit a classification model on selected features in train split
-- [ ] Evaluate model performance on in-sample (train) and out-of-sample (validate) data
-- [ ] Push work to scripts
+- [x] Use initial-hypotheses features that proved significant as model features
+- [x] Build and fit a classification model on selected features in train split
+- [x] Evaluate model performance on in-sample (train) and out-of-sample (validate) data
+- [x] Push work to scripts
 - [ ] Report all work in MVP final notebook
 ## Post-MVP Iteration
 - [ ] Conduct statistical testing on categorical features to identify potential candidates for modeling
