@@ -49,7 +49,7 @@ def prep_explore():
         Reduce DOS attack class rows by 95%,
         Group all attack classes into 'anomalous' class,
         Split data 50%-30%-20% for df, validate, and test splits,
-        Return original df and the three splits.
+        Return original df and the exploration split (train split).
     '''
     # set up environment, ingest data
     spark = pyspark.sql.SparkSession.builder.getOrCreate()
