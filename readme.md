@@ -38,7 +38,7 @@ This dataset is available for download here: https://www.kaggle.com/galaxyh/kdd-
 - [x] Build and fit a classification model on selected features in train split
 - [x] Evaluate model performance on in-sample (train) and out-of-sample (validate) data
 - [x] Push work to scripts
-- [ ] Report all work in MVP final notebook
+- [x] Report all work in MVP final notebook
 ## Post-MVP Iteration
 - [ ] Conduct statistical testing on categorical features to identify potential candidates for modeling
 - [ ] Check distributions on continuous features using target as hue to identify features for clustering
