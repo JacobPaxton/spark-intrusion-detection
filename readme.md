@@ -39,6 +39,9 @@ This dataset is available for download here: https://www.kaggle.com/galaxyh/kdd-
 - [x] Evaluate model performance on in-sample (train) and out-of-sample (validate) data
 - [x] Push work to scripts
 - [x] Report all work in MVP final notebook
+## Model Deployment MVP
+- [x] Push model to a Docker container
+- [x] Pass inputs to container
 ## Post-MVP Iteration
 - [ ] Conduct statistical testing on categorical features to identify potential candidates for modeling
 - [ ] Check distributions on continuous features using target as hue to identify features for clustering
@@ -49,7 +52,7 @@ This dataset is available for download here: https://www.kaggle.com/galaxyh/kdd-
 - [ ] Evaluate tuned models on train and validate
 - [ ] Select best model and evaluate model on test
 - [ ] Report all work in post-MVP final notebook
-## Production
+## Post-MVP Model Deployment
 - [ ] Push model to an AWS partition through Docker
 - [ ] Pass sequestered unlabeled dataset to model in batch
 - [ ] Report results in production notebook
