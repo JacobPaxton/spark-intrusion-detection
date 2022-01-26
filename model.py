@@ -43,7 +43,7 @@ def prep_model_MVP():
     X_train_smtom, y_train_smtom = smtom.fit_resample(pd.DataFrame(X_train_scaled), y_train)
 
     # return splits
-    return X_train_smtom, y_train_smtom, X_validate_scaled, y_validate, X_test_scaled, y_test
+    return scaler, X_train_smtom, y_train_smtom, X_validate_scaled, y_validate, X_test_scaled, y_test
 
 
 def bl_evaluation(y_train, y_validate):
@@ -102,4 +102,4 @@ def rf_evaluation(X_train, y_train, X_validate, y_validate):
     ).T
 
     # return reports
-    return rf_report_train, rf_report_validate
+    return rf, rf_report_train, rf_report_validate
