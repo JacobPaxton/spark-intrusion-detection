@@ -42,11 +42,10 @@ This dataset is available for download here: https://www.kaggle.com/galaxyh/kdd-
 ## Model Deployment MVP
 - [x] Push model to a Docker container
 - [x] Pass inputs to container
-## Post-MVP Iteration
-- [ ] Conduct statistical testing on categorical features to identify potential candidates for modeling
-- [ ] Check distributions on continuous features using target as hue to identify features for clustering
-- [ ] Use feature engineering to create more-predictive features
-- [ ] Use Tableau to visualize engineered features
+## Post-MVP Iteration #1
+- [x] Conduct statistical testing on categorical features to identify potential candidates for modeling
+- [x] Check distributions on continuous features using target as hue to identify features for clustering
+- [x] Use feature engineering to create more-predictive features
 - [ ] Build and fit more classification models using new features
 - [ ] Use Grid Search to optimize hyperparameters
 - [ ] Evaluate tuned models on train and validate
